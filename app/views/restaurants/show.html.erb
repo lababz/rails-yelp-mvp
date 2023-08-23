@@ -1,0 +1,20 @@
+<div class="container">
+  <h1><%= @restaurant[:name].capitalize %></h1>
+  <h2><%= @restaurant[:category].capitalize %></h2>
+  <p>📍 <%= @restaurant[:address] %></p>
+  <p>📞 <%= @restaurant[:phone_number] %></p>
+
+  <div class="review_section list-group">
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item">
+      <p>⭐️<%= review.rating %>/5 <%= review.content %></p>
+    </li>
+  <% end %>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :rating, collection: 0..5 %>
+    <%= f.input :content%>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+  <p><%= link_to "Back to list", root_path %></p>
+</div>
